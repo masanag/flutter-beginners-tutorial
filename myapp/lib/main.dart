@@ -16,8 +16,22 @@ class Home extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.red,
       ),
-      body: Center(
-        child: Image.asset('assets/snowboarding_04.jpg'),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text('hello, world'),
+          FlatButton(
+            onPressed: (){},
+            color: Colors.amber,
+            child: Text('click me'),
+          ),
+          Container(
+            color: Colors.cyan,
+            padding: EdgeInsets.all(30.0),
+            child: Text('inside container'),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
