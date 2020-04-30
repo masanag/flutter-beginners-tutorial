@@ -1,106 +1,64 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
-void main() => runApp(MaterialApp(
-  home: NinjaCard(),
+import 'package:flutter/material.dart';
+import 'quote.dart';
+
+void main() => runApp( MaterialApp(
+  home: QuoteList(),
 ));
 
-class NinjaCard extends StatefulWidget {
+class QuoteList extends StatefulWidget {
   @override
-  _NinjaCardState createState() => _NinjaCardState();
+  _QuoteListState createState() => _QuoteListState();
 }
 
-class _NinjaCardState extends State<NinjaCard> {
+class _QuoteListState extends State<QuoteList> {
+  List<Quote> quotes = [
+    Quote(author: 'Oscar Wild', text: 'the first qote'),
+    Quote(author: 'Oscar Wild', text: 'the second qote'),
+    Quote(author: 'Oscar Wild', text: 'the third qote'),
+    Quote(author: 'Oscar Wild', text: 'the forth qote'),
+  ];
 
-  int ninjaLevel = 0;
+  Widget quoteTemplate(quote) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              quote.text,
+              style: TextStyle(
+                fontSize: 18.0,
+                color: Colors.grey[600],
+              ),
+            ),
+            SizedBox(height: 6.0),
+            Text(
+              quote.author,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.grey[800],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('Ninja ID Card'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[850],
-        elevation: 0.0,
+        title: Text('Awsome Quotes'),
+        backgroundColor: Colors.redAccent,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            ninjaLevel += 1;
-          });
-        },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.grey[800],
-      ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
-        child: Column (
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Center(
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/thumb.jpg'),
-                radius: 40.0,
-              ),
-            ),
-            Divider(
-              height: 60.0,
-              color: Colors.grey[800],
-            ),
-            Text(
-              'NAME',
-              style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2.0,
-              ),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              'Chun-Li',
-              style: TextStyle(
-                color: Colors.amberAccent,
-                letterSpacing: 2.0,
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 30.0),
-            Text(
-              'CURRENT NINJA LEVEL',
-              style: TextStyle(
-                color: Colors.grey,
-                letterSpacing: 2.0,
-              ),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              '$ninjaLevel',
-              style: TextStyle(
-                color: Colors.amberAccent,
-                letterSpacing: 2.0,
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 30.0),
-            Row(
-              children: <Widget>[
-                Icon(
-                  Icons.email,
-                  color: Colors.grey[400],
-                ),
-                SizedBox(width: 10.0,),
-                Text(
-                  'chun.li@example.com',
-                  style: TextStyle(
-                    color: Colors.grey[400],
-                    fontSize:  10.0,
-                    letterSpacing: 1.0,
-                  ),
-                ),
-              ],
-            ),
-        ],)
+      body: Column(
+        children: quotes.map((quote) => quoteTemplate(quote) ).toList(),
       ),
     );
   }
