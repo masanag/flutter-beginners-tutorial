@@ -36,14 +36,16 @@ class _HomeState extends State<Home> {
                 FlatButton.icon(
                   onPressed: () async {
                     dynamic result = await Navigator.pushNamed(context, '/location');
-                    setState(() {
-                      data = {
-                        'time': result['time'],
-                        'location': result['location'],
-                        'isDaytime': result['isDaytime'] ,
-                        'flag': result['flag'],
-                      };
-                    });
+                    if (result != null) {
+                      setState(() {
+                        data = {
+                          'time': result['time'],
+                          'location': result['location'],
+                          'isDaytime': result['isDaytime'] ,
+                          'flag': result['flag'],
+                        };
+                      });
+                    }
                   },
                   icon: Icon(
                     Icons.edit_location,
